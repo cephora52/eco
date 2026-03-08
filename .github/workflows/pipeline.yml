@@ -37,11 +37,17 @@ jobs:
 
   sonar:
     runs-on: ubuntu-latest
-    continue-on-error: true
+    needs: build
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
 
       - name: SonarCloud analysis
         run: |
